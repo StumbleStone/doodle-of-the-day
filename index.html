@@ -1,1 +1,208 @@
-<h1>Hello world!</>
+<html>
+  <head>
+    <title>Doodle of the Day</title>
+  </head>
+  <body>
+    <h1 id='Header'>Doodle of the Day</h1>
+    <div id='Content'>
+
+    </div>
+  </body>
+</html>
+
+<style>
+  :root {
+    --text-color: #b3a894;
+      --background-color: #151b1f;
+      --background-color-secondary: #1f292e;
+      --background-color-secondary-hover: #263238;
+    --shadow: #000;
+    --border: #000;
+  }
+
+  body {
+      background-color: var(--background-color);
+      color: var(--text-color);
+      padding: 0;
+      margin: 0;
+      font-family: sans-serif;
+  }
+
+  h1#Header {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+      background-color: var(--background-color-secondary);
+      text-align: center;
+      font-size: 38px;
+      font-weight: bolder;
+      box-shadow: 7px 7px var(--shadow);
+  }
+
+  div#Content {
+      margin: 20px;
+      text-align: center;
+      gap: 20px;
+  }
+
+  div.Tile {
+      display: inline-block;
+      margin: 20px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background-color: var(--background-color-secondary);
+      transition-duration: 0.5s;
+      box-shadow: 7px 7px var(--shadow);
+  }
+
+  div.Tile:hover {
+      background-color: var(--background-color-secondary-hover);
+      transform: translate(-3px, -3px);
+      box-shadow: 10px 10px var(--shadow);
+      margin-top: 17px;
+  }
+
+  /*TODO make dynamic size*/
+  div.TileContent {
+      width: 220px;
+      height: 220px;
+      position: relative;
+      display: flex;
+      flex-wrap: nowrap;
+      align-content: center;
+      justify-content: center;
+  }
+
+  div.Tile h2 {
+      margin: 10px;
+  }
+
+  div.Tile:hover div.TileTitleBorderDiv {
+    width: 80%;
+    border-top: solid 3px var(--text-color);
+  }
+
+  div.TileTitleBorderDiv {
+      display: inline-block;
+      transition-duration: 0.5s;
+      border-top: solid 3px transparent;
+      width: 0;
+  }
+
+  /*//TODO move to own file*/
+  div.Container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+  }
+
+  div.spinner {
+      animation: 1s infinite linear spin;
+      border-radius: 50%;
+      border-bottom: 5px solid;
+      /*border: 35px solid;*/
+      position: absolute;
+  }
+
+  @keyframes spin {
+      from {
+          transform: rotate(0deg);
+      }
+      to {
+          transform: rotate(360deg);
+      }
+  }
+</style>
+
+<script>
+  const contentDiv = document.getElementById("Content");
+  function AddTitleHeading(heading){
+    const headingDiv = document.createElement("div");
+    const headingText = document.createElement("h2");
+    headingText.textContent = heading;
+    headingDiv.appendChild(headingText);
+
+    const borderDiv = document.createElement("div");
+    borderDiv.classList.add("TileTitleBorderDiv");
+    headingDiv.appendChild(borderDiv);
+
+    return headingDiv;
+  }
+
+  function AddTile(tileHeading){
+    const newTile = document.createElement("div");
+    newTile.classList.add("Tile");
+
+    newTile.appendChild(AddTitleHeading(tileHeading));
+    contentDiv.appendChild(newTile);
+
+    const newTileContent = document.createElement("div");
+    newTileContent.classList.add("TileContent")
+    newTile.appendChild(newTileContent);
+
+    return newTileContent;
+  }
+
+  const spinnerClass = {
+    render: (container, maxSize, minSize) =>{
+    const resetEls = document.getElementsByName("spinner");
+    while(resetEls.length > 0) resetEls[0].remove();
+
+    const circleCnt = 5;
+
+    const colArr = [];
+    for(let i = 0; i < circleCnt; i ++){
+      colArr.push((360 / circleCnt) * i);
+    }
+
+    for(let i = 0; i < 10; i++){
+      colArr.sort(() => Math.random() - 0.5);
+    }
+
+    for(let i = 0; i < circleCnt; i++){
+      const newSpinner = document.createElement("div");
+      newSpinner.classList.add("spinner");
+      const size = minSize + ((maxSize - minSize) / circleCnt) * i;
+      const offset = (maxSize - size) / 2;
+
+      newSpinner.style.width = size + "px";
+      newSpinner.style.height = (size - 5) + "px";
+
+      newSpinner.style.top = offset + "px";
+      newSpinner.style.left = offset + "px";
+
+      const delay = Math.round((i / circleCnt) * 100);
+
+      const delayStr = `${1}.${( '0' + delay).slice(-2)}s`;
+
+      newSpinner.style.animationDelay = delayStr;
+      newSpinner.style.animationDuration = `${2-((circleCnt - i)/circleCnt) / 3}s`;
+      // newSpinner.style.animationDuration = `1s`;
+      //
+      // if(i % 2 === 0){
+      //   newSpinner.style.animationDirection = "reverse";
+      // }
+
+      const col = `hsl(${(360 / circleCnt) * i}deg 100% 35%)`;
+      // const col = `hsl(${colArr.pop()}deg 100% 35%)`;
+      newSpinner.style.borderBottomColor = col;
+
+      // const col2 = `hsl(${(360 / circleCnt) * i}deg 100% 35% / 0.50)`;
+      // const col = `hsl(${colArr.pop()}deg 100% 35%)`;
+      // newSpinner.style.borderBottomColor = col2;
+
+      container.appendChild(newSpinner);
+    }
+  },
+  }
+
+  function createSpinner(){
+    const newTile = AddTile("Rainbow Spinner");
+    const bBox = newTile.getBoundingClientRect();
+    spinnerClass.render(newTile, bBox.width, bBox.width * 0.1);
+  }
+
+  createSpinner();
+</script>
