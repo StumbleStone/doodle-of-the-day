@@ -1,0 +1,44 @@
+div.Tile {
+    display: inline-block;
+    margin: 20px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background-color: var(--background-color-secondary);
+    transition-duration: 0.5s;
+    box-shadow: 7px 7px var(--shadow);
+}
+
+div.Tile:hover {
+    background-color: var(--background-color-secondary-hover);
+    transform: translate(-3px, -3px);
+    box-shadow: 10px 10px var(--shadow);
+    margin-top: 17px;
+}
+
+/*TODO make dynamic size*/
+div.TileContent {
+    width: 200px;
+    margin: 15px;
+    height: 200px;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+}
+
+div.Tile h2 {
+    margin: 10px;
+}
+
+div.Tile:hover div.TileTitleBorderDiv {
+    width: 80%;
+    border-top: solid 3px var(--text-color);
+}
+
+div.TileTitleBorderDiv {
+    display: inline-block;
+    transition-duration: 0.5s;
+    border-top: solid 3px transparent;
+    width: 0;
+}
