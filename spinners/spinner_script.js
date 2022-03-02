@@ -131,7 +131,7 @@ function createRainbowAsyncMixedSpinner() {
     createSpinner({
         title: "2022-03-04",
         color: "reverse",
-        circleCount: 6,
+        circleCount: 12,
         borderSize: 5,
         durationBase: 2,
         duration: "async",
@@ -146,7 +146,7 @@ function createRainbowAsyncMixedSpinnerBlocky() {
         color: "reverse",
         circleCount: 20,
         borderSize: 6,
-        borderRadius: 20,
+        borderRadius: 30,
         durationBase: 3,
         duration: "async",
         direction: "mixed",
@@ -156,5 +156,5 @@ function createRainbowAsyncMixedSpinnerBlocky() {
 createRainbowAsyncSpinner();
 createRainbowSyncSpinner();
 createRainbowSyncMixedSpinner();
-createRainbowAsyncMixedSpinner();
-createRainbowAsyncMixedSpinnerBlocky();
+//createRainbowAsyncMixedSpinner();
+//createRainbowAsyncMixedSpinnerBlocky();
