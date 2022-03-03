@@ -156,5 +156,5 @@ function createRainbowAsyncMixedSpinnerBlocky() {
 createRainbowAsyncSpinner();
 createRainbowSyncSpinner();
 createRainbowSyncMixedSpinner();
-//createRainbowAsyncMixedSpinner();
+createRainbowAsyncMixedSpinner();
 //createRainbowAsyncMixedSpinnerBlocky();
