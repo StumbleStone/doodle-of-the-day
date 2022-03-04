@@ -26,7 +26,16 @@ const spinnerClass = {
         }
     },
 
+    delay: (circleCnt, i, offset, multiplier) => {
+        const delay = (offset ?? 0) * i +(multiplier ?? 1) * (i / circleCnt);
+
+        return `${delay.toFixed(2)}s`;
+    },
+
     render: (params) =>{
+        const maxSize = (params.maxSize ?? 200) / Math.sqrt(2);
+        const minSize = (params.minSize ?? 20) / Math.sqrt(2);
+
         const borderSize = params.borderSize ?? 5;
         const borderRadius = params.borderRadius ?? 50;
 
@@ -47,23 +56,13 @@ const spinnerClass = {
         for(let i = 1; i < circleCnt; i++){
             const newSpinner = document.createElement("div");
             newSpinner.classList.add("spinner");
-            const size = params.minSize + ((params.maxSize - params.minSize) / circleCnt) * i;
-            const offset = (params.maxSize - size) / 2;
+            const size = minSize + ((maxSize - minSize) / circleCnt) * i;
 
             newSpinner.style.width = size + "px";
             newSpinner.style.height = (size - (params.circle !== "flat" ? borderSize : 0)) + "px";
 
-            newSpinner.style.top = offset + "px";
-            newSpinner.style.left = offset + "px";
-
-            const delay = Math.round((i / circleCnt) * 100);
-
-            const delayStr = `${0}.${( '0' + delay).slice(-2)}s`;
-
-            newSpinner.style.animationDelay = delayStr;
+            newSpinner.style.animationDelay = spinnerClass.delay(circleCnt, i, params.delayOffset, params.delayMultiplier);
             newSpinner.style.animationDuration = spinnerClass.duration(circleCnt, i, params.duration, params.durationBase ?? 2);
-            // newSpinner.style.animationDuration = `1s`;
-            //
 
             newSpinner.style.animationDirection = spinnerClass.direction(params.direction, i);
 
@@ -77,12 +76,7 @@ const spinnerClass = {
             const hue = params.color === "reverse" ? (360 / circleCnt) * (circleCnt - i) : (360 / circleCnt) * (i - 1)
 
             const col = `hsl(${hue}deg 100% 35%)`;
-            // const col = `hsl(${colArr.pop()}deg 100% 35%)`;
             newSpinner.style.borderBottomColor = col;
-
-            // const col2 = `hsl(${(360 / circleCnt) * i}deg 100% 35% / 0.50)`;
-            // const col = `hsl(${colArr.pop()}deg 100% 35%)`;
-            // newSpinner.style.borderBottomColor = col2;
 
             params.container.appendChild(newSpinner);
         }
@@ -134,22 +128,80 @@ function createRainbowAsyncMixedSpinner() {
         circleCount: 12,
         borderSize: 5,
         durationBase: 2,
-        duration: "async",
+        delayMultiplier: 0.5,
+        delayOffset: 0.333,
+        duration: "sync",
         circle: "flat",
         direction: "mixed",
     });
 }
 
-function createRainbowAsyncMixedSpinnerBlocky() {
+function createRainbowAsyncMixedSpinnerHalfBlocky() {
     createSpinner({
         title: "2022-03-05",
         color: "reverse",
         circleCount: 20,
         borderSize: 6,
-        borderRadius: 30,
+        borderRadius: 35,
         durationBase: 3,
-        duration: "async",
+        duration: "sync",
         direction: "mixed",
+    });
+}
+
+function createRainbowAsyncSpinnerBlocky() {
+    createSpinner({
+        title: "2022-03-06",
+        color: "reverse",
+        circleCount: 40,
+        borderSize: 3,
+        borderRadius: 1,
+        delayMultiplier: 3,
+        durationBase: 2,
+        delayOffset: 0,
+        duration: "sync",
+        direction: "clockwise",
+    });
+}
+
+function createRainbowAsyncSpinnerMixedBlocky() {
+    createSpinner({
+        title: "2022-03-07",
+        color: "reverse",
+        circleCount: 20,
+        borderSize: 6,
+        borderRadius: 0,
+        durationBase: 2,
+        delayOffset: 0,
+        duration: "sync",
+        direction: "mixed",
+    });
+}
+
+function createRainbowWhirpoolSpinner() {
+    createSpinner({
+        title: "2022-03-08",
+        duration: "sync",
+        delayMultiplier: 1,
+        delayOffset: 0.25,
+        durationBase: 1.5,
+        circleCount: 15,
+        borderSize: 10,
+    });
+}
+
+function createRainbowAsyncSpinnerMixedBlockySlowly() {
+    createSpinner({
+        title: "2022-03-09",
+        color: "reverse",
+        circleCount: 20,
+        borderSize: 6,
+        borderRadius: 0,
+        delayMultiplier: 4,
+        durationBase: 2,
+        delayOffset: 0,
+        duration: "sync",
+        direction: "anticlockwise",
     });
 }
 
@@ -157,4 +209,8 @@ createRainbowAsyncSpinner();
 createRainbowSyncSpinner();
 createRainbowSyncMixedSpinner();
 createRainbowAsyncMixedSpinner();
-//createRainbowAsyncMixedSpinnerBlocky();
+createRainbowAsyncMixedSpinnerHalfBlocky();
+createRainbowAsyncSpinnerBlocky();
+createRainbowAsyncSpinnerMixedBlocky();
+createRainbowWhirpoolSpinner();
+createRainbowAsyncSpinnerMixedBlockySlowly();

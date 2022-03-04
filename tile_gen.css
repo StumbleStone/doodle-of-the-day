@@ -6,6 +6,7 @@ div.Tile {
     background-color: var(--background-color-secondary);
     transition-duration: 0.5s;
     box-shadow: 7px 7px var(--shadow);
+    vertical-align: top;
 }
 
 div.Tile:hover {
@@ -24,6 +25,7 @@ div.TileContent {
     display: flex;
     flex-wrap: nowrap;
     align-content: center;
+    align-items: center;
     justify-content: center;
 }
 
