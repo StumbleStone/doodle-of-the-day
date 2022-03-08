@@ -212,5 +212,5 @@ createRainbowAsyncMixedSpinner();
 createRainbowAsyncMixedSpinnerHalfBlocky();
 createRainbowAsyncSpinnerBlocky();
 createRainbowAsyncSpinnerMixedBlocky();
-// createRainbowWhirpoolSpinner();
+createRainbowWhirpoolSpinner();
 // createRainbowAsyncSpinnerMixedBlockySlowly();
