@@ -122,6 +122,58 @@ class SpinnerGenerator {
         });
     }
 
+    createRainbowAsyncMirrorSpinner(date) {
+        this.createSpinner({
+            title:date,
+            duration: "async",
+            mirror: true,
+            durationBase: 1,
+            circleCount: 8,
+        });
+    }
+
+    createRainbowSyncMirrorSpinner(date) {
+        this.createSpinner({
+            title:date,
+            color: "reverse",
+            mirror: true,
+            circleCount: 20,
+            borderSize: 2,
+            delayOffset: 1.2,
+            circle: "flat",
+            durationBase: 2,
+            duration: "sync",
+        });
+    }
+
+    createRainbowSyncMirrorSpinner2(date) {
+        this.createSpinner({
+            title:date,
+            color: "reverse",
+            mirror: true,
+            circleCount: 20,
+            borderSize: 2,
+            delayOffset: 1.5,
+            circle: "flat",
+            durationBase: 2,
+            duration: "sync",
+        });
+    }
+
+    createRainbowSyncMirrorSpinner3(date) {
+        this.createSpinner({
+            title:date,
+            color: "reverse",
+            mirror: true,
+            circleCount: 20,
+            borderSize: 2,
+            delayOffset: 1.7,
+            circle: "flat",
+            durationBase: 2,
+            duration: "sync",
+        });
+    }
+
     createRainbowSyncMixedSpinner(date) {
         this.createSpinner({
             title:date,
@@ -129,6 +181,20 @@ class SpinnerGenerator {
             circleCount: 20,
             borderSize: 2,
             durationBase: 2,
+            duration: "sync",
+            circle: "flat",
+            direction: "mixed",
+        });
+    }
+
+    createRainbowSyncMixedMirrorDelaySpinner(date) {
+        this.createSpinner({
+            title:date,
+            color: "reverse",
+            circleCount: 20,
+            borderSize: 3,
+            durationBase: 2,
+            mirror: true,
             duration: "sync",
             circle: "flat",
             direction: "mixed",
@@ -193,6 +259,38 @@ class SpinnerGenerator {
         });
     }
 
+    createRainbowAsyncSpinnerBlocky2(date) {
+        this.createSpinner({
+            title:date,
+            color: "reverse",
+            circleCount: 40,
+            borderSize: 3,
+            borderRadius: 5,
+            delayMultiplier: 2.5,
+            durationBase: 2,
+            mirror:true,
+            delayOffset: 0,
+            duration: "sync",
+            direction: "clockwise",
+        });
+    }
+
+    createRainbowAsyncSpinnerBlocky3(date) {
+        this.createSpinner({
+            title:date,
+            color: "reverse",
+            circleCount: 40,
+            borderSize: 3,
+            borderRadius: 5,
+            delayMultiplier: 2.5,
+            durationBase: 2,
+            mirror:true,
+            delayOffset: 0.3,
+            duration: "sync",
+            direction: "clockwise",
+        });
+    }
+
     createRainbowAsyncSpinnerMixedBlocky(date) {
         this.createSpinner({
             title:date,
@@ -216,6 +314,34 @@ class SpinnerGenerator {
             durationBase: 1.5,
             circleCount: 15,
             borderSize: 10,
+        });
+    }
+
+    createRainbowAsyncSpinnerMixedBlockyMirror(date) {
+        this.createSpinner({
+            title:date,
+            color: "reverse",
+            circleCount: 20,
+            borderSize: 6,
+            borderRadius: 0,
+            durationBase: 4,
+            delayOffset: 0.1,
+            mirror: true,
+            duration: "sync",
+            direction: "mixed",
+        });
+    }
+
+    createRainbowWhirpoolSpinnerMirror(date) {
+        this.createSpinner({
+            title:date,
+            duration: "sync",
+            delayMultiplier: 3,
+            delayOffset: 0,
+            durationBase: 1.5,
+            circleCount: 20,
+            mirror: true,
+            borderSize: 8,
         });
     }
 
@@ -261,6 +387,15 @@ class SpinnerGenerator {
         dateChecker("2022-03-09", (date) => this.createRainbowAsyncSpinnerMixedBlockySlowly(date));
         dateChecker("2022-03-10", (date) => this.createRainbowAsyncSpinnerMixedSquare(date));
         dateChecker("2022-03-13", (date) => this.createRainbowSyncMixedMirrorSpinner(date));
+        dateChecker("2022-03-14", (date) => this.createRainbowSyncMixedMirrorDelaySpinner(date));
+        dateChecker("2022-03-15", (date) => this.createRainbowAsyncMirrorSpinner(date));
+        dateChecker("2022-03-16", (date) => this.createRainbowSyncMirrorSpinner(date));
+        dateChecker("2022-03-17", (date) => this.createRainbowAsyncSpinnerMixedBlockyMirror(date));
+        dateChecker("2022-03-18", (date) => this.createRainbowWhirpoolSpinnerMirror(date));
+        dateChecker("2022-03-19", (date) => this.createRainbowSyncMirrorSpinner2(date));
+        dateChecker("2022-03-20", (date) => this.createRainbowSyncMirrorSpinner3(date));
+        dateChecker("2022-03-21", (date) => this.createRainbowAsyncSpinnerBlocky2(date));
+        dateChecker("2022-03-22", (date) => this.createRainbowAsyncSpinnerBlocky3(date));
 
     }
 
