@@ -33,9 +33,9 @@ class SpinnerGenerator {
     }
 
     delay(circleCnt, i, offset, multiplier){
-        const delay = (offset ?? 0) * i +(multiplier ?? 1) * (i / circleCnt);
+        const delay = (offset ?? 0) * i +(multiplier ?? 1) * ((circleCnt - i) / circleCnt);
 
-        return `${delay.toFixed(2)}s`;
+        return `-${delay.toFixed(2)}s`;
     }
 
     renderSpinner(params){
@@ -81,7 +81,14 @@ class SpinnerGenerator {
 
             const hue = params.color === "reverse" ? (360 / circleCnt) * (circleCnt - i) : (360 / circleCnt) * (i - 1)
 
-            newSpinner.style.borderBottomColor = `hsl(${hue}deg 100% 35%)`;
+            const col = `hsl(${hue}deg 100% 35%)`;
+
+            newSpinner.style.borderBottomColor = col;
+
+            if(params.mirror){
+                newSpinner.style.borderTop = `${borderSize}px solid`;
+                newSpinner.style.borderTopColor = col;
+            }
 
             params.container.appendChild(newSpinner);
         }
@@ -128,6 +135,21 @@ class SpinnerGenerator {
         });
     }
 
+    createRainbowSyncMixedMirrorSpinner(date) {
+        this.createSpinner({
+            title:date,
+            circleCount: 8,
+            borderSize: 8,
+            delayOffset: 0,
+            delayMultiplier: 0,
+            durationBase: 2,
+            duration: "sync",
+            circle: "flat",
+            mirror: true,
+            direction: "mixed",
+        });
+    }
+
     createRainbowAsyncMixedSpinner(date) {
         this.createSpinner({
             title:date,
@@ -136,7 +158,7 @@ class SpinnerGenerator {
             borderSize: 5,
             durationBase: 2,
             delayMultiplier: 0.5,
-            delayOffset: 0.333,
+            delayOffset: 1.5,
             duration: "sync",
             circle: "flat",
             direction: "mixed",
@@ -189,8 +211,8 @@ class SpinnerGenerator {
         this.createSpinner({
             title:date,
             duration: "sync",
-            delayMultiplier: 1,
-            delayOffset: 0.25,
+            delayMultiplier: 3,
+            delayOffset: 0,
             durationBase: 1.5,
             circleCount: 15,
             borderSize: 10,
@@ -219,9 +241,9 @@ class SpinnerGenerator {
             circleCount: 20,
             borderSize: 10,
             borderRadius: 20,
-            delayMultiplier: 4,
+            delayMultiplier: 0,
             durationBase: 2,
-            delayOffset: 0.3,
+            delayOffset: 0.5,
             duration: "sync",
             direction: "clockwise",
         });
@@ -238,6 +260,8 @@ class SpinnerGenerator {
         dateChecker("2022-03-08", (date) => this.createRainbowWhirpoolSpinner(date));
         dateChecker("2022-03-09", (date) => this.createRainbowAsyncSpinnerMixedBlockySlowly(date));
         dateChecker("2022-03-10", (date) => this.createRainbowAsyncSpinnerMixedSquare(date));
+        dateChecker("2022-03-13", (date) => this.createRainbowSyncMixedMirrorSpinner(date));
+
     }
 
     close(){
