@@ -104,8 +104,8 @@ class progressbarGenerator {
         }
     }
 
-    oldSchoolSandbox(params){
-        const newTile = AddTile(params.title ?? "ProgressBar");
+    oldSchoolSandbox(params, date){
+        const newTile = AddTile(date, "ProgressBar");
         const bBox = newTile.getBoundingClientRect();
 
         const container = this.generateContainer();
@@ -183,13 +183,11 @@ class progressbarGenerator {
         return updater;
     }
 
-    createProgressBar(params) {
-        const newTile = AddTile(params.title ?? "ProgressBar");
+    createProgressBar(params, date) {
+        const newTile = AddTile(date, "ProgressBar");
         const bBox = newTile.getBoundingClientRect();
 
         const updater = this.renderProgressBar({container: newTile, maxSize: bBox.width, ...params});
-
-        newTile.id = "ProgressBar_" + (params.title ?? "Unknown");
         this.renders.push(newTile);
 
         return updater;
@@ -197,25 +195,22 @@ class progressbarGenerator {
 
     createSegmentProgressBar(date){
         const updater = this.createProgressBar({
-            title: date,
             height: 25,
             borderRadius: 3,
             segments: "dynamic",
-        });
+        }, date);
 
         this.updaters.push(updater);
     }
 
     createOldSchoolProgressBar(date){
-        const updater = this.oldSchoolSandbox({
-            title: date,
-        })
+        const updater = this.oldSchoolSandbox({}, date);
         this.updaters.push(updater);
     }
 
     render() {
-        dateChecker("2022-03-11", (date) => this.createSegmentProgressBar(date));
-        dateChecker("2022-03-12", (date) => this.createOldSchoolProgressBar(date));
+        renderDoodle("2022-03-11", (date) => this.createSegmentProgressBar(date));
+        renderDoodle("2022-03-12", (date) => this.createOldSchoolProgressBar(date));
     }
 
     close(){

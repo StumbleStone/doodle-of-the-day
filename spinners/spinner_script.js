@@ -94,12 +94,10 @@ class SpinnerGenerator {
         }
     }
 
-    createSpinner(params){
-        const newTile = AddTile(params.title ?? "Spinner");
+    createSpinner(params, date){
+        const newTile = AddTile(date, "Spinner");
         const bBox = newTile.getBoundingClientRect();
         this.renderSpinner({container: newTile, maxSize: bBox.width, minSize: bBox.width * 0.1, ...params});
-
-        newTile.id = "Spinner_" + (params.title ?? "Unknown");
         this.renders.push(newTile);
     }
 
@@ -109,7 +107,7 @@ class SpinnerGenerator {
             duration: "async",
             durationBase: 1,
             circleCount: 8,
-        });
+        }, date);
     }
 
     createRainbowSyncSpinner(date) {
@@ -119,7 +117,7 @@ class SpinnerGenerator {
             circleCount: 10,
             durationBase: 2,
             duration: "sync",
-        });
+        }, date);
     }
 
     createRainbowAsyncMirrorSpinner(date) {
@@ -129,7 +127,7 @@ class SpinnerGenerator {
             mirror: true,
             durationBase: 1,
             circleCount: 8,
-        });
+        }, date);
     }
 
     createRainbowSyncMirrorSpinner(date) {
@@ -143,7 +141,7 @@ class SpinnerGenerator {
             circle: "flat",
             durationBase: 2,
             duration: "sync",
-        });
+        }, date);
     }
 
     createRainbowSyncMirrorSpinner2(date) {
@@ -157,7 +155,7 @@ class SpinnerGenerator {
             circle: "flat",
             durationBase: 2,
             duration: "sync",
-        });
+        }, date);
     }
 
     createRainbowSyncMirrorSpinner3(date) {
@@ -171,7 +169,7 @@ class SpinnerGenerator {
             circle: "flat",
             durationBase: 2,
             duration: "sync",
-        });
+        }, date);
     }
 
     createRainbowSyncMixedSpinner(date) {
@@ -184,7 +182,7 @@ class SpinnerGenerator {
             duration: "sync",
             circle: "flat",
             direction: "mixed",
-        });
+        }, date);
     }
 
     createRainbowSyncMixedMirrorDelaySpinner(date) {
@@ -198,7 +196,7 @@ class SpinnerGenerator {
             duration: "sync",
             circle: "flat",
             direction: "mixed",
-        });
+        }, date);
     }
 
     createRainbowSyncMixedMirrorSpinner(date) {
@@ -213,7 +211,7 @@ class SpinnerGenerator {
             circle: "flat",
             mirror: true,
             direction: "mixed",
-        });
+        }, date);
     }
 
     createRainbowAsyncMixedSpinner(date) {
@@ -228,7 +226,7 @@ class SpinnerGenerator {
             duration: "sync",
             circle: "flat",
             direction: "mixed",
-        });
+        }, date);
     }
 
     createRainbowAsyncMixedSpinnerHalfBlocky(date) {
@@ -241,7 +239,7 @@ class SpinnerGenerator {
             durationBase: 3,
             duration: "sync",
             direction: "mixed",
-        });
+        }, date);
     }
 
     createRainbowAsyncSpinnerBlocky(date) {
@@ -256,7 +254,7 @@ class SpinnerGenerator {
             delayOffset: 0,
             duration: "sync",
             direction: "clockwise",
-        });
+        }, date);
     }
 
     createRainbowAsyncSpinnerBlocky2(date) {
@@ -272,7 +270,7 @@ class SpinnerGenerator {
             delayOffset: 0,
             duration: "sync",
             direction: "clockwise",
-        });
+        }, date);
     }
 
     createRainbowAsyncSpinnerBlocky3(date) {
@@ -288,7 +286,7 @@ class SpinnerGenerator {
             delayOffset: 0.3,
             duration: "sync",
             direction: "clockwise",
-        });
+        }, date);
     }
 
     createRainbowAsyncSpinnerMixedBlocky(date) {
@@ -302,7 +300,7 @@ class SpinnerGenerator {
             delayOffset: 0,
             duration: "sync",
             direction: "mixed",
-        });
+        }, date);
     }
 
     createRainbowWhirpoolSpinner(date) {
@@ -314,7 +312,7 @@ class SpinnerGenerator {
             durationBase: 1.5,
             circleCount: 15,
             borderSize: 10,
-        });
+        }, date);
     }
 
     createRainbowAsyncSpinnerMixedBlockyMirror(date) {
@@ -329,7 +327,7 @@ class SpinnerGenerator {
             mirror: true,
             duration: "sync",
             direction: "mixed",
-        });
+        }, date);
     }
 
     createRainbowWhirpoolSpinnerMirror(date) {
@@ -342,7 +340,7 @@ class SpinnerGenerator {
             circleCount: 20,
             mirror: true,
             borderSize: 8,
-        });
+        }, date);
     }
 
     createRainbowAsyncSpinnerMixedBlockySlowly(date) {
@@ -357,7 +355,7 @@ class SpinnerGenerator {
             delayOffset: 0,
             duration: "sync",
             direction: "anticlockwise",
-        });
+        }, date);
     }
 
     createRainbowAsyncSpinnerMixedSquare(date) {
@@ -372,30 +370,31 @@ class SpinnerGenerator {
             delayOffset: 0.5,
             duration: "sync",
             direction: "clockwise",
-        });
+        }, date);
     }
 
     render() {
-        dateChecker("2022-03-01", (date) => this.createRainbowAsyncSpinner(date));
-        dateChecker("2022-03-02", (date) => this.createRainbowSyncSpinner(date));
-        dateChecker("2022-03-03", (date) => this.createRainbowSyncMixedSpinner(date));
-        dateChecker("2022-03-04", (date) => this.createRainbowAsyncMixedSpinner(date));
-        dateChecker("2022-03-05", (date) => this.createRainbowAsyncMixedSpinnerHalfBlocky(date));
-        dateChecker("2022-03-06", (date) => this.createRainbowAsyncSpinnerBlocky(date));
-        dateChecker("2022-03-07", (date) => this.createRainbowAsyncSpinnerMixedBlocky(date));
-        dateChecker("2022-03-08", (date) => this.createRainbowWhirpoolSpinner(date));
-        dateChecker("2022-03-09", (date) => this.createRainbowAsyncSpinnerMixedBlockySlowly(date));
-        dateChecker("2022-03-10", (date) => this.createRainbowAsyncSpinnerMixedSquare(date));
-        dateChecker("2022-03-13", (date) => this.createRainbowSyncMixedMirrorSpinner(date));
-        dateChecker("2022-03-14", (date) => this.createRainbowSyncMixedMirrorDelaySpinner(date));
-        dateChecker("2022-03-15", (date) => this.createRainbowAsyncMirrorSpinner(date));
-        dateChecker("2022-03-16", (date) => this.createRainbowSyncMirrorSpinner(date));
-        dateChecker("2022-03-17", (date) => this.createRainbowAsyncSpinnerMixedBlockyMirror(date));
-        dateChecker("2022-03-18", (date) => this.createRainbowWhirpoolSpinnerMirror(date));
-        dateChecker("2022-03-19", (date) => this.createRainbowSyncMirrorSpinner2(date));
-        dateChecker("2022-03-20", (date) => this.createRainbowSyncMirrorSpinner3(date));
-        dateChecker("2022-03-21", (date) => this.createRainbowAsyncSpinnerBlocky2(date));
-        dateChecker("2022-03-22", (date) => this.createRainbowAsyncSpinnerBlocky3(date));
+        renderDoodle("2022-03-01", (date) => this.createRainbowAsyncSpinner(date));
+        renderDoodle("2022-03-02", (date) => this.createRainbowSyncSpinner(date));
+        renderDoodle("2022-03-03", (date) => this.createRainbowSyncMixedSpinner(date));
+        renderDoodle("2022-03-04", (date) => this.createRainbowAsyncMixedSpinner(date));
+        renderDoodle("2022-03-05", (date) => this.createRainbowAsyncMixedSpinnerHalfBlocky(date));
+        renderDoodle("2022-03-06", (date) => this.createRainbowAsyncSpinnerBlocky(date));
+        renderDoodle("2022-03-07", (date) => this.createRainbowAsyncSpinnerMixedBlocky(date));
+        renderDoodle("2022-03-08", (date) => this.createRainbowWhirpoolSpinner(date));
+        renderDoodle("2022-03-09", (date) => this.createRainbowAsyncSpinnerMixedBlockySlowly(date));
+        renderDoodle("2022-03-10", (date) => this.createRainbowAsyncSpinnerMixedSquare(date));
+
+        renderDoodle("2022-03-13", (date) => this.createRainbowSyncMixedMirrorSpinner(date));
+        renderDoodle("2022-03-14", (date) => this.createRainbowSyncMixedMirrorDelaySpinner(date));
+        renderDoodle("2022-03-15", (date) => this.createRainbowAsyncMirrorSpinner(date));
+        renderDoodle("2022-03-16", (date) => this.createRainbowSyncMirrorSpinner(date));
+        renderDoodle("2022-03-17", (date) => this.createRainbowAsyncSpinnerMixedBlockyMirror(date));
+        renderDoodle("2022-03-18", (date) => this.createRainbowWhirpoolSpinnerMirror(date));
+        renderDoodle("2022-03-19", (date) => this.createRainbowSyncMirrorSpinner2(date));
+        renderDoodle("2022-03-20", (date) => this.createRainbowSyncMirrorSpinner3(date));
+        renderDoodle("2022-03-21", (date) => this.createRainbowAsyncSpinnerBlocky2(date));
+        renderDoodle("2022-03-22", (date) => this.createRainbowAsyncSpinnerBlocky3(date));
 
     }
 
