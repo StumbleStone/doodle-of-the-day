@@ -12,6 +12,7 @@ div.Tile {
 div.Tile:hover {
     background-color: var(--background-color-secondary-hover);
     transform: translate(-3px, -3px);
+    color: var(--background-color);
     box-shadow: 10px 10px var(--shadow);
     margin-top: 17px;
 }
@@ -35,7 +36,7 @@ div.Tile h2 {
 
 div.Tile:hover div.TileTitleBorderDiv {
     width: 80%;
-    border-top: solid 3px var(--text-color);
+    border-top: solid 3px var(--background-color);
 }
 
 div.TileTitleBorderDiv {
